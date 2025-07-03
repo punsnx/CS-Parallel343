@@ -1,8 +1,10 @@
 #include <iostream>
-using namespace std;
+
+__global__ void hello(){
+    printf("Hello Parallel World!! from block: %u, thread: %u\n", blockIdx.x, threadIdx.x);
+}
 
 int main(){
-    //Sequentail code
-    cout << "Hello World" << endl;
-    return 0;
+    hello<<<2, 5>>>();
+    cudaDeviceSynchronize();
 }

@@ -5,6 +5,6 @@ __global__ void hello(){
 }
 
 int main(){
-    hello<<<2, 5>>>();
+    hello<<<3, 33>>>();
     cudaDeviceSynchronize();
 }

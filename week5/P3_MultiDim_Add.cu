@@ -1,6 +1,8 @@
+//6610402230 Sirisuk Tharntham
 #include <stdio.h>
 using namespace std;
 
+//CPU version
 void vectorAdd2DV0(int *h1_in,int *h2_in,int *h_out,int n){
     for(int r =0;r< n;++r){
         for(int c = 0;c<n;++c){
@@ -9,7 +11,7 @@ void vectorAdd2DV0(int *h1_in,int *h2_in,int *h_out,int n){
     }
     
 }
-
+//CUDA version
 __global__ void  vectorAdd2D(int *d1_in,int *d2_in,int *d_out,int n){
     int r = blockDim.x * blockIdx.x + threadIdx.x;
     int c = blockDim.y * blockIdx.y + threadIdx.y;
@@ -32,7 +34,8 @@ int isMetrixEqual(int *N, int *M,int n){
 
 
 int main(){
-    int n = 20;
+    //matrix addition in multi-dimensional matrix, excecution with multi-dim threads
+    int n = 30;
     int *h1_in = (int *)malloc(n*n*sizeof(int));
     int *h2_in = (int *)malloc(n*n*sizeof(int));
     int *h_out = (int *)malloc(n*n*sizeof(int));
@@ -75,9 +78,6 @@ int main(){
     cudaDeviceSynchronize();
     cudaMemcpy(h2_out,d_out,n*n*sizeof(int),cudaMemcpyDeviceToHost);
 
-
-
-
     for(int r = 0;r<n;++r){
         for(int c = 0;c<n;++c){
             printf("%d ",h2_out[r * n + c]);
@@ -86,21 +86,6 @@ int main(){
     }
 
     printf("Matrix is %s",( isMetrixEqual(h_out,h2_out,n) ? "Equal" : "Not Equal"));
-
-    //matrix multiplication
-
-
-    
-
-
-
-
-
-
-
-
-
-
 
     return 0;
 }

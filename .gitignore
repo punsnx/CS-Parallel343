@@ -539,3 +539,6 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/java,go,rust,c,c++,python,cuda,vim,visualstudiocode,intellij,windows,macos,linux
 
 Explain
+
+.vscode/
+cuda-samples/
